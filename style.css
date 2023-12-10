@@ -1,26 +1,34 @@
 * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
 }
 
-button {
-    display: block;
-    width: 42px;
-    height: 42px;
-    border-radius: 20px;
-    border: none;
-    font-size: 32px;
-    color: white;
-    background-color: rgb(27, 179, 179);
-}
+body {
+    height: 100vh;
+    width: 100%;
+    background: rgb(180, 224, 242);
+  }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    height: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: rgb(243, 241, 216);
+    margin: 10px auto;
+    width: 70%;
+    height: auto;
+    border-radius: 5px;
+    background: white;
+    padding: 25px;
+}
+
+#addEvent {
+    float: right;
+    height: 42px;
+    border-radius: 10px;
+    border: none;
+    padding: 5px 10px;
+    font-size: 20px;
+    color: white;
+    background-color: rgb(27, 179, 179);
 }
 
 h1 { 
