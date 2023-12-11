@@ -5,73 +5,20 @@ document.addEventListener("DOMContentLoaded", function () {
     let upcomingEventSection = document.getElementById("upComingEvent");
     let pastEventSection = document.getElementById("pastEvent");
   
-    // Move the formatTime function declaration to the top
-    let formatTime = function (timeString) {
-      let [hours, minutes] = timeString.split(":");
-      let period = hours >= 12 ? "PM" : "AM";
-      hours = hours % 12 || 12; // Convert to 12-hour format
-      return `${hours}:${minutes} ${period}`;
-    };
-  
-    let events = [
-      {
-        eventName: "Macy's Birthday Party",
-        eventType: "Birthday",
-        eventDate: "07-21-2023",
-        startTime: "10:00 AM",
-        endTime: "02:00 PM",
-        eventDescription: "Celebrating a special day!",
-      },
-      {
-        eventName: "Dylan's Wedding",
-        eventType: "Wedding",
-        eventDate: "01-20-2024",
-        startTime: "02:30 PM",
-        endTime: "06:30 PM",
-        eventDescription: "I'm going to eat the whole cake.",
-      },
-      {
-        eventName: "Lucia's Baby Shower",
-        eventType: "Baby Shower",
-        eventDate: "05-05-2024",
-        startTime: "12:00 PM",
-        endTime: "03:00 PM",
-        eventDescription: "More cupcakes!",
-      },
-    ];
-  
-    // Loop through the events array and append them to the appropriate sections
-    events.forEach(function (eventData) {
-      // Convert eventDate to mm-dd-yyyy format
-      let formattedEventDate = new Date(eventData.eventDate);
-      formattedEventDate = `${
-        formattedEventDate.getMonth() + 1
-      }-${formattedEventDate.getDate()}-${formattedEventDate.getFullYear()}`;
-  
-      // Create a new event element
-      let eventElement = document.createElement("div");
-      eventElement.className = "event";
-      eventElement.innerHTML = `
-        <h3>${eventData.eventName} - ${eventData.eventType}</h3>
-        <p>Date: ${formattedEventDate}</p>
-        <p>Time: ${formatTime(eventData.startTime)} to ${formatTime(eventData.endTime)}</p>
-        <p>Description: ${eventData.eventDescription}</p>
-      `;
-  
-      // Determine if the event is upcoming or past
-      let currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0);
-  
-      let eventDateTime = new Date(`${eventData.eventDate}T${eventData.startTime}`);
-      if (currentDate < eventDateTime) {
-        // Upcoming event
-        upcomingEventSection.appendChild(eventElement);
-      } else {
-        // Past event
-        pastEventSection.appendChild(eventElement);
-      }
-    });
-  
+    // Function to create and append an event element
+    function appendEventToSection(event, section) {
+        let eventElement = document.createElement("div");
+        eventElement.className = "event";
+        eventElement.innerHTML = `
+        <h3>${event.eventName} - ${event.eventType}</h3>
+        <p>Date: ${event.eventDate}</p>
+        <p>Time: ${event.startTime} - ${event.endTime}</p>
+        <p>Description: ${event.eventDescription}</p>
+        `;
+        section.appendChild(eventElement);
+    }
+
+
     // Show the pop-up form
     addEventBtn.addEventListener("click", function () {
       popupForm.style.display = "block";
@@ -126,25 +73,15 @@ document.addEventListener("DOMContentLoaded", function () {
         let endTime = document.getElementById("endTime").value;
         let eventDescription = document.getElementById("eventDescription").value;
   
-        // Convert 24-hour format to 12-hour format
-        startTime = formatTime(startTime);
-        endTime = formatTime(endTime);
-  
-        // Convert eventDate to mm-dd-yyyy format
-        let formattedEventDate = new Date(eventDate);
-        formattedEventDate = `${
-          formattedEventDate.getMonth() + 1
-        }-${formattedEventDate.getDate()}-${formattedEventDate.getFullYear()}`;
-  
         // Create a new event element
         let eventElement = document.createElement("div");
         eventElement.className = "event";
         eventElement.innerHTML = `
-          <h3>${eventName} - ${eventType}</h3>
-          <p>Date: ${formattedEventDate}</p>
-          <p>Time: ${startTime} - ${endTime}</p>
-          <p>Description: ${eventDescription}</p>
-        `;
+            <h3>${eventName} - ${eventType}</h3>
+            <p>Date: ${eventDate}</p>
+            <p>Time: ${startTime} - ${endTime}</p>
+            <p>Description: ${eventDescription}</p>
+          `;
   
         // Determine if the event is upcoming or past
         let currentDate = new Date();
@@ -164,5 +101,40 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Please fill in all required fields.");
       }
     });
-  });
+
+    let events = [
+        {
+          eventName: "Macy's Birthday Party",
+          eventType: "Birthday",
+          eventDate: "2023-07-21",
+          startTime: "10:00",
+          endTime: "12:00",
+          eventDescription: "Celebrating a special day!",
+        },
+        {
+          eventName: "Dylan's Wedding",
+          eventType: "Wedding",
+          eventDate: "2024-01-04",
+          startTime: "14:30",
+          endTime: "16:30",
+          eventDescription: "I'm going to eat the whole cake.",
+        },
+      ];
+    
+      events.forEach(function (event) {
+        let currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
+        let eventDate = new Date(event.eventDate);
+        eventDate.setHours(0, 0, 0, 0);
+    
+        if (currentDate < eventDate) {
+          // Upcoming event
+          appendEventToSection(event, upcomingEventSection);
+        } else {
+          // Past event
+          appendEventToSection(event, pastEventSection);
+        }
+      });
+    });
+
   

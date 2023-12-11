@@ -90,3 +90,7 @@ button {
   }
 
   #addEventBtn { margin-bottom: 30px;}
+
+  button .options-btn {
+    background-color: none;
+  }
