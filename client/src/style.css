@@ -13,7 +13,7 @@ body {
 .container {
     margin: 10px auto;
     width: 428px;
-    height: 926px;
+    height: auto;
     border-radius: 5px;
     background: white;
     padding: 30px;
@@ -25,7 +25,7 @@ h1 {
     font-weight: 400; 
 }
 
-.upComingEvents, .pastEvents { margin-top: 60px; margin-bottom: 20px;}
+.upComingEvents, .pastEvents { margin-top: 40px; margin-bottom: 20px;}
 
 button {
     width: 100%;
@@ -75,3 +75,18 @@ button {
   label { font-size: 20px; padding: 10px 0 5px 0;}
   input, select {height: 40px; padding: 10px;}
   textarea { padding: 10px; }
+
+  .event {
+    background-color: rgb(235, 235, 235);
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 5px;
+    line-height: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  #addEventBtn { margin-bottom: 30px;}
