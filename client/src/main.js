@@ -16,7 +16,66 @@ document.addEventListener("DOMContentLoaded", function () {
         <p>Description: ${event.eventDescription}</p>
         `;
         section.appendChild(eventElement);
+
+        // Add event listeners for edit and delete actions
+    eventElement.addEventListener('click', function () {
+        editEvent(event);
+      });
+  
+      eventElement.addEventListener('mouseenter', function () {
+        showDeleteButton(eventElement);
+      });
+  
+      eventElement.addEventListener('mouseleave', function () {
+        hideDeleteButton(eventElement);
+      });
+  
+      section.appendChild(eventElement);
     }
+  
+    // Function to edit an event
+    function editEvent(event) {
+      // Populate the form with event data
+      document.getElementById('eventName').value = event.eventName;
+      document.getElementById('eventType').value = event.eventType;
+      document.getElementById('eventDate').value = event.eventDate;
+      document.getElementById('startTime').value = event.startTime;
+      document.getElementById('endTime').value = event.endTime;
+      document.getElementById('eventDescription').value = event.eventDescription;
+  
+      // Show the form
+      popupForm.style.display = 'block';
+    }
+  
+    // Function to show the delete button
+    function showDeleteButton(eventElement) {
+        let deleteButton = document.createElement('span');
+        deleteButton.className = 'delete-button';
+        deleteButton.innerHTML = '<i class="fa fa-trash"></i>'; 
+        deleteButton.addEventListener('click', function (event) {
+          deleteEvent(eventElement);
+          event.stopPropagation(); // Prevent the click event from triggering the edit action
+        });
+      
+        eventElement.appendChild(deleteButton);
+      }
+  
+    // Function to hide the delete button
+    function hideDeleteButton(eventElement) {
+      let deleteButton = eventElement.querySelector('.delete-button');
+      if (deleteButton) {
+        eventElement.removeChild(deleteButton);
+      }
+    }
+  
+    // Function to delete an event
+    function deleteEvent(eventElement) {
+      // Remove the event element from the DOM
+      eventElement.parentNode.removeChild(eventElement);
+    
+    }
+
+    
 
 
     // Show the pop-up form

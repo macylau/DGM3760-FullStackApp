@@ -1,96 +1,111 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {
-    width: 100%;
-    background: rgb(180, 224, 242);
-  }
+  width: 100%;
+  background: rgb(180, 224, 242);
+}
 
 .container {
-    margin: 10px auto;
-    width: 428px;
-    height: auto;
-    border-radius: 5px;
-    background: white;
-    padding: 30px;
+  margin: 10px auto;
+  width: 428px;
+  height: auto;
+  border-radius: 5px;
+  background: white;
+  padding: 30px;
 }
 
 h1 { 
-    font-size: 24px; 
-    text-align: left; 
-    font-weight: 400; 
+  font-size: 24px; 
+  text-align: left; 
+  font-weight: 400; 
 }
 
 .upComingEvents, .pastEvents { margin-top: 40px; margin-bottom: 20px;}
 
 button {
-    width: 100%;
-    height: 50px;
-    border-radius: 5px;
-    border: none;
-    margin: 20px auto;
-    font-size: 20px;
-    font-weight: 500;
-    color: white;
-    background-color: rgb(34, 193, 193);
-    cursor: pointer;
+  width: 100%;
+  height: 50px;
+  border-radius: 5px;
+  border: none;
+  margin: 20px auto;
+  font-size: 20px;
+  font-weight: 500;
+  color: white;
+  background-color: rgb(34, 193, 193);
+  cursor: pointer;
 }
 
 .popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 368px;
-    margin: 20px auto;
-    transform: translate(-50%, -50%);
-    border: none;
-    padding: 30px;
-    background-color: rgb(130, 130, 130);
-    z-index: 1;
-    text-align: left;
-    border-radius: 15px;
-    color: white;
-  }
-  
-  .close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    font-size: 36px;
-    font-weight: bold;
-    cursor: pointer;
-  }
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 368px;
+  margin: 20px auto;
+  transform: translate(-50%, -50%);
+  border: none;
+  padding: 30px;
+  background-color: rgb(130, 130, 130);
+  z-index: 1;
+  text-align: left;
+  border-radius: 15px;
+  color: white;
+}
 
-  #eventForm {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-  }
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 36px;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  label { font-size: 20px; padding: 10px 0 5px 0;}
-  input, select {height: 40px; padding: 10px;}
-  textarea { padding: 10px; }
+#eventForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
 
-  .event {
-    background-color: rgb(235, 235, 235);
-    padding: 20px;
-    margin: 15px 0;
-    border-radius: 5px;
-    line-height: 24px;
-  }
+label { font-size: 20px; padding: 10px 0 5px 0;}
+input, select {height: 40px; padding: 10px;}
+textarea { padding: 10px; }
 
-  h3 {
-    font-size: 20px;
-    font-weight: 500;
-  }
+.event {
+  position: relative;  /* Added this line for positioning */
+  background-color: rgb(235, 235, 235);
+  padding: 20px;
+  margin: 15px 0;
+  border-radius: 5px;
+  line-height: 24px;
+}
 
-  #addEventBtn { margin-bottom: 30px;}
+h3 {
+  font-size: 20px;
+  font-weight: 500;
+}
 
-  button .options-btn {
-    background-color: none;
-  }
+span.delete-button{
+  position: absolute;
+  top: 50%;
+  right: 0px; /* Adjust the initial position */
+  width: 45px;
+  height: 100%; /* Set a fixed height for the icon */
+  line-height: 130px; /* Vertically center the text inside the icon */
+  color: white;
+  text-align: center;
+  background: red;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: translateY(-50%); /* Vertical centering */
+}
+
+
+
+
