@@ -15,6 +15,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVW3ZF8A8dNzTSiZvYURzNg2VwlPIG7Pk&libraries=places" defer></script>
   </head>
   <body>
     <div class="container">
@@ -55,9 +56,14 @@
           <input type="date" id="eventDate" name="eventDate" required />
 
           <label for="eventTime">Event Time*</label>
-          <input type="time" id="startTime" name="startTime" required />
+          <div class="timePicker">
+            <input type="time" id="startTime" name="startTime" required />
           <span> to </span>
           <input type="time" id="endTime" name="endTime" required />
+          </div>
+          
+          <label for="eventLocation">Event Location*</label>
+          <input type="text" id="eventLocation" name="eventLocation" placeholder="Event Location" required />
 
           <label for="eventDescription">Event Description*</label>
           <textarea

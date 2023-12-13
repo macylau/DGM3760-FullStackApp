@@ -12,7 +12,7 @@ body {
 
 .container {
   margin: 10px auto;
-  width: 428px;
+  width: 600px;
   height: auto;
   border-radius: 5px;
   background: white;
@@ -32,7 +32,7 @@ button {
   height: 50px;
   border-radius: 5px;
   border: none;
-  margin: 20px auto;
+  margin: 10px auto;
   font-size: 20px;
   font-weight: 500;
   color: white;
@@ -45,7 +45,7 @@ button {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 368px;
+  width: 550px;
   margin: 20px auto;
   transform: translate(-50%, -50%);
   border: none;
@@ -69,12 +69,12 @@ button {
 #eventForm {
   display: flex;
   flex-direction: column;
-  gap: 5px;
 }
 
 label { font-size: 20px; padding: 10px 0 5px 0;}
 input, select {height: 40px; padding: 10px;}
 textarea { padding: 10px; }
+#startTime, #endTime { width: 233px;}
 
 .event {
   position: relative;  /* Added this line for positioning */
