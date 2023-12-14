@@ -97,7 +97,7 @@ span.delete-button{
   right: 0px; /* Adjust the initial position */
   width: 45px;
   height: 100%; /* Set a fixed height for the icon */
-  line-height: 130px; /* Vertically center the text inside the icon */
+  line-height: 160px; /* Vertically center the text inside the icon */
   color: white;
   text-align: center;
   background: red;

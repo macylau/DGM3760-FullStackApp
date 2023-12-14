@@ -97,6 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>Description: ${eventDescription}</p>
           `;
 
+        showDeleteButton(eventElement);
+
         // Determine if the event is upcoming or past
         let currentDate = new Date();
         currentDate.setHours(0, 0, 0, 0);
@@ -139,11 +141,10 @@ document.addEventListener("DOMContentLoaded", function () {
   // Click on events for editing
   document.addEventListener("click", function (event) {
     let clickedElement = event.target.closest(".event");
-    if (clickedElement) {
+    if (clickedElement && !event.target.closest(".delete-button")) {
       // Set the editedEvent variable to the clicked event for editing
       editedEvent = clickedElement;
 
-      // Extract data from the clicked event and pre-fill the form
       let eventData = {
         name: editedEvent.querySelector("h3").textContent,
         type: editedEvent.querySelector("h3").textContent.split(" - ")[1],
@@ -174,4 +175,44 @@ document.addEventListener("DOMContentLoaded", function () {
       popupForm.style.display = "block";
     }
   });
+
+  // Attach mouseover/mouseout events to existing events
+  document.querySelectorAll(".event").forEach(function (eventElement) {
+    handleMouseEvents(eventElement);
+  });
+
+  function showDeleteButton(eventElement) {
+    let deleteButton = document.createElement("span");
+    deleteButton.className = "delete-button";
+    deleteButton.innerHTML = '<i class="fa fa-trash"></i>';
+
+    // Attach mouseover/mouseout events
+    eventElement.addEventListener("mouseover", function () {
+      deleteButton.style.display = "inline-block";
+    });
+
+    eventElement.addEventListener("mouseout", function () {
+      deleteButton.style.display = "none";
+    });
+
+    // Attach click event to delete the event
+    deleteButton.addEventListener("click", function (event) {
+      deleteEvent(eventElement);
+      event.stopPropagation(); // Prevent the click event from triggering the edit action
+    });
+
+    // Append the delete button to the event element
+    eventElement.appendChild(deleteButton);
+  }
+  function deleteEvent(eventElement) {
+    // Determine whether the event is in the upcoming or past section
+    let isUpcomingEvent = upcomingEventSection.contains(eventElement);
+
+    // Remove the event element from the respective section
+    if (isUpcomingEvent) {
+      upcomingEventSection.removeChild(eventElement);
+    } else {
+      pastEventSection.removeChild(eventElement);
+    }
+  }
 });
