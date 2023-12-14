@@ -5,9 +5,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let upcomingEventSection = document.getElementById("upComingEvent");
   let pastEventSection = document.getElementById("pastEvent");
   let eventLocationInput = document.getElementById("eventLocation");
+  let editedEvent = null;
 
   eventLocationInput.addEventListener("click", function () {
-    const autocomplete = new google.maps.places.Autocomplete(eventLocationInput);
+    const autocomplete = new google.maps.places.Autocomplete(
+      eventLocationInput
+    );
   });
 
   // Show the pop-up form
@@ -82,10 +85,11 @@ document.addEventListener("DOMContentLoaded", function () {
         formattedEventDate.getMonth() + 1
       }-${formattedEventDate.getDate()}-${formattedEventDate.getFullYear()}`;
 
-      // Create a new event element
-      let eventElement = document.createElement("div");
-      eventElement.className = "event";
-      eventElement.innerHTML = `
+      if (!editedEvent) {
+        // Create a new event element
+        let eventElement = document.createElement("div");
+        eventElement.className = "event";
+        eventElement.innerHTML = `
             <h3>${eventName} - ${eventType}</h3>
             <p>Date: ${formattedEventDate}</p>
             <p>Time: ${startTime} - ${endTime}</p>
@@ -93,22 +97,81 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>Description: ${eventDescription}</p>
           `;
 
-      // Determine if the event is upcoming or past
-      let currentDate = new Date();
-      currentDate.setHours(0, 0, 0, 0);
+        // Determine if the event is upcoming or past
+        let currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);
 
-      if (currentDate < new Date(eventDate)) {
-        // Upcoming event
-        upcomingEventSection.appendChild(eventElement);
+        if (currentDate < new Date(eventDate)) {
+          // Upcoming event
+          upcomingEventSection.appendChild(eventElement);
+        } else {
+          // Past event
+          pastEventSection.appendChild(eventElement);
+        }
       } else {
-        // Past event
-        pastEventSection.appendChild(eventElement);
-      }
+        // Update the existing event with the new data
+        editedEvent.querySelector(
+          "h3"
+        ).textContent = `${eventName} - ${eventType}`;
+        editedEvent.querySelector(
+          "p:nth-child(2)"
+        ).textContent = `Date: ${formattedEventDate}`;
+        editedEvent.querySelector(
+          "p:nth-child(3)"
+        ).textContent = `Time: ${startTime} - ${endTime}`;
+        editedEvent.querySelector(
+          "p:nth-child(4)"
+        ).textContent = `Location: ${eventLocation}`;
+        editedEvent.querySelector(
+          "p:nth-child(5)"
+        ).textContent = `Description: ${eventDescription}`;
 
+        // Reset the editedEvent variable after updating
+        editedEvent = null;
+      }
       // Close the form after saving
       popupForm.style.display = "none";
     } else {
       alert("Please fill in all required fields.");
+    }
+  });
+
+  // Click on events for editing
+  document.addEventListener("click", function (event) {
+    let clickedElement = event.target.closest(".event");
+    if (clickedElement) {
+      // Set the editedEvent variable to the clicked event for editing
+      editedEvent = clickedElement;
+
+      // Extract data from the clicked event and pre-fill the form
+      let eventData = {
+        name: editedEvent.querySelector("h3").textContent,
+        type: editedEvent.querySelector("h3").textContent.split(" - ")[1],
+        date: editedEvent
+          .querySelector("p:nth-child(2)")
+          .textContent.split(": ")[1],
+        time: editedEvent
+          .querySelector("p:nth-child(3)")
+          .textContent.split(": ")[1],
+        location: editedEvent
+          .querySelector("p:nth-child(4)")
+          .textContent.split(": ")[1],
+        description: editedEvent
+          .querySelector("p:nth-child(5)")
+          .textContent.split(": ")[1],
+      };
+
+      document.getElementById("eventName").value = eventData.name;
+      eventTypeSelect.value = eventData.type;
+      document.getElementById("eventDate").value = eventData.date;
+      let [startTime, endTime] = eventData.time.split(" - ");
+      document.getElementById("startTime").value = startTime;
+      document.getElementById("endTime").value = endTime;
+      document.getElementById("eventLocation").value = eventData.location;
+      document.getElementById("eventDescription").value = eventData.description;
+
+      // Open the form for editing
+      popupForm.style.display = "block";
     }
   });
 });

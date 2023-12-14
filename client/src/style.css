@@ -83,6 +83,7 @@ textarea { padding: 10px; }
   margin: 15px 0;
   border-radius: 5px;
   line-height: 24px;
+  cursor: pointer;
 }
 
 h3 {
