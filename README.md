@@ -1,6 +1,6 @@
 <h2>Hello! This is an Event App I created.</h2>
 </br>
-<p>You don't miss out on any awesome events in life, you can use this app to keep track of the events!</p>
+<p>You don't want to miss out on any awesome events in life, you can use this app to keep track of the events!</p>
 <p>With this app, users can:</p>
 <ul>
   <li>Add events</li>
