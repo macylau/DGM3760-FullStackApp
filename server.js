@@ -11,18 +11,30 @@ app.use(express.static("client"));
 let events = [
   {
     id: 0,
-    eventName: "Yard Sale",
-    eventType: "Work",
+    eventName: "Free dinner",
+    eventType: "Dinner",
+    startTime: "10:00",
+    endTime: "14:00",
+    eventLocation: "800 W University Pkwy, Orem, UT 84058",
+    eventDescription: "Free dinner at LA 1140",
   },
   {
     id: 1,
     eventName: "Daisy's Wedding",
     eventType: "Wedding",
+    startTime: "18:00",
+    endTime: "20:00",
+    eventLocation: "800 W University Pkwy, Orem, UT 84058",
+    eventDescription: "I'm gonna eat the whole cake",
   },
   {
     id: 2,
     eventName: "Josh's Birthday",
     eventType: "Birthday",
+    startTime: "14:00",
+    endTime: "17:00",
+    eventLocation: "800 W University Pkwy, Orem, UT 84058",
+    eventDescription: "Need to get him a birthday gift",
   },
 ];
 
@@ -69,7 +81,6 @@ app.delete('/api/event/:id', (req, res) => {
 
   res.json({ success: true });
 });
-
 
 
 // Start the server
